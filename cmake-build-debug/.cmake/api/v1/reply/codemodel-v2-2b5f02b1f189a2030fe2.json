@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Programming_Exercises_I",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Programming_Exercises_I::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Programming_Exercises_I-Debug-8c89494f139e9ed379d2.json",
+					"name" : "Programming_Exercises_I",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/shion/OneDrive/Welcome/Active/YokohamaNationalUniversity/Sophomore/Spring/3Wed/Programming Exercises I/cmake-build-debug",
+		"source" : "C:/Users/shion/OneDrive/Welcome/Active/YokohamaNationalUniversity/Sophomore/Spring/3Wed/Programming Exercises I"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
