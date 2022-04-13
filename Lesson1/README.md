@@ -4,9 +4,7 @@
 
 Github上でプレビューして参照することが可能である。
 
-
-
-
+https://github.com/shion1305/2022_YNUB2_Programming_Exercises_I/tree/master/Lesson1
 
 # 練習問題6
 
