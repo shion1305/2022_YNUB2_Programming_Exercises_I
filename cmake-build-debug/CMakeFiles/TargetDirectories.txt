@@ -1,3 +1,0 @@
-C:/Users/shion/OneDrive/Welcome/Active/YokohamaNationalUniversity/Sophomore/Spring/3Wed/Programming Exercises I/cmake-build-debug/CMakeFiles/Programming_Exercises_I.dir
-C:/Users/shion/OneDrive/Welcome/Active/YokohamaNationalUniversity/Sophomore/Spring/3Wed/Programming Exercises I/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/shion/OneDrive/Welcome/Active/YokohamaNationalUniversity/Sophomore/Spring/3Wed/Programming Exercises I/cmake-build-debug/CMakeFiles/rebuild_cache.dir
