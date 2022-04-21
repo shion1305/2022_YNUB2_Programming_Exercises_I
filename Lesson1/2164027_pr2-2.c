@@ -7,7 +7,8 @@ int main() {
     print(a, b);
     a += b;
     b = a - b;
-    a -= a;
+    a -= b;
+    //上の一行が間違えていたため修正。
     print(a, b);
     return 0;
 }
