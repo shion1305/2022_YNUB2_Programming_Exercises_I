@@ -16,8 +16,8 @@ int main() {
     printf("INPUT FIRST VECTOR...\n");
     Vector a = ask_for_input();
     printf("INPUT SECOND VECTOR...\n");
-    Vector b=ask_for_input();
-    
+    Vector b = ask_for_input();
+
     double innerProduct = getInnerProduct(a, b);
     printf("%lf", acos(innerProduct / (length(a) * length(b))) * 180 / M_PI);
 }
