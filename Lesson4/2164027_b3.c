@@ -16,7 +16,7 @@ int main() {
 void print(int n) {
     if (n > 999) {
         print(n / 1000);
-        printf(",%d", n%1000);
+        printf(",%03d", n%1000);
     } else {
         printf("%d",n);
     }
