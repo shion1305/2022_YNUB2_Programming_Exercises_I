@@ -1,10 +1,7 @@
 #include <stdio.h>
 
-//Euclidean Algorithm
-
 void print(int n);
 
-//Recursive Process goes here.
 int ask_for_input();
 
 int main() {
@@ -12,11 +9,11 @@ int main() {
     print(a);
 }
 
-//assert a>=b
 void print(int n) {
     if (n > 999) {
         print(n / 1000);
-        printf(",%d", n%1000);
+        //再帰処理
+        printf(",%03d", n%1000);
     } else {
         printf("%d",n);
     }
