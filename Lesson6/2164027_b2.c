@@ -5,10 +5,11 @@ int word_copy(char *b, char *out);
 int main() {
     //テストケースの入力
     char target[] = "   b2164027 SHION Ichikawa";
+    printf("INPUT: \"%s\"\n\n", target);
     //結果を格納する配列の用意。
     char result[1000];
-    word_copy(result, target);
-    printf("%s", result);
+    int length = word_copy(result, target);
+    printf("%s, length = %d\n", result, length);
 }
 
 int word_copy(char *a, char *b) {
