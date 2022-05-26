@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int word_copy(char *b, char *out);
+int word_copy(char *a, char *b);
 
 int main() {
     //テストケースの入力
