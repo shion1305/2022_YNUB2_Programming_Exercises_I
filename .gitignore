@@ -2,3 +2,5 @@
 /.idea
 /Lesson1/*.png
 main.c
+*.pgm
+*.txt
