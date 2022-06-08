@@ -19,13 +19,15 @@ typedef struct {
 //プロトタイプ宣言。
 void print(student data[1000], int size);
 
-
-
-int main() {
-
+//コマンド引数を指定できるようにしてmain関数のフォーマットに指定
+int main(int argc, char *argv[]) {
+    //コマンド引数が指定されていない場合の対策
+    if (argc < 1) {
+        printf("File is not specified correctly...\nEXIT.");
+    }
     //ファイルポインターの用意。
     FILE *fp;
-    fp = fopen("../Lesson8/data_8.txt", "r");
+    fp = fopen(argv[1], "r");
     //データ格納用の変数の用意。
     int size = 0;
     student data[1000];
