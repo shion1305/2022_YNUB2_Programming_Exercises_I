@@ -31,6 +31,8 @@ void print(student data[3000], int size);
 
 void printError();
 
+void exportCSV(FILE *fp);
+
 //コマンド引数を指定できるようにしてmain関数のフォーマットに指定
 int main(int argc, char *argv[]) {
     //コマンド引数が指定されていない場合の対策
@@ -53,6 +55,17 @@ int main(int argc, char *argv[]) {
     sort();
     print(data, size);
     printf("交換回数: %d, 比較回数: %d", swap_count, comparison_count);
+    {
+        FILE *fp;
+        fp = fopen(argv[2], "w");
+        if (fp == NULL) {
+            //アクセス許可が下りなかったときにはメッセージを表示。
+            printf("Export process skipped.\n");
+            return 0;
+        }
+        exportCSV(fp);
+        fclose(fp);
+    }
     return 0;
 }
 
@@ -79,7 +92,6 @@ void print(student data[3000], int size) {
 }
 
 void sort() {
-    printf("SORT\n");
     //loop i from 0 to (size - 1).
     //no need to loop to (size),
     //which means comparing one to one.
@@ -105,4 +117,11 @@ void swap(int i1, int i2) {
     data[i1] = data[i2];
     data[i2] = d;
     swap_count++;
+}
+
+//CSV出力用の関数
+void exportCSV(FILE *fp) {
+    for (int i = 0; i < size; ++i) {
+        fprintf(fp, "%d,%s,%d\n", data[i].num, data[i].name, data[i].score);
+    }
 }
