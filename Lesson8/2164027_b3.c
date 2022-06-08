@@ -80,7 +80,10 @@ void print(student data[3000], int size) {
 
 void sort() {
     printf("SORT\n");
-    for (int i = 0; i < size; ++i) {
+    //loop i from 0 to (size - 1).
+    //no need to loop to (size),
+    //which means comparing one to one.
+    for (int i = 0; i < size - 1; ++i) {
         int index = i;
         int max = data[i].score;
         int maxI = i;
