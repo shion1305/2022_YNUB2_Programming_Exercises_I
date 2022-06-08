@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
     //コマンド引数が指定されていない場合の対策
     if (argc < 1) {
         printf("File is not specified correctly...\nEXIT.");
+        return 1;
     }
     //ファイルポインターの用意。
     FILE *fp;
