@@ -17,7 +17,7 @@ typedef struct {
 
 
 //プロトタイプ宣言。
-void print(student data[1000], int size);
+void print(student data[3000], int size);
 
 //コマンド引数を指定できるようにしてmain関数のフォーマットに指定
 int main(int argc, char *argv[]) {
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     fp = fopen(argv[1], "r");
     //データ格納用の変数の用意。
     int size = 0;
-    student data[1000];
+    student data[3000];
     while (fscanf(fp, "%d %s %d", &data[size].num, data[size].name, &data[size].score) != EOF) {
         size++;
     }
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
  * "構造体配列とデータ数を引数として関数内で出力を行なうこと"とある。
  */
 
-void print(student data[1000], int size) {
+void print(student data[3000], int size) {
     for (int i = 0; i < size; ++i) {
         printf("%4d %-20s %3d\n", data[i].num, data[i].name, data[i].score);
     }
