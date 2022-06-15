@@ -15,27 +15,27 @@ typedef struct {
     int score;      /* 得点 */
 } student;
 
-int sortInitial(student data[3000], int size);
+void sortInitial(student data[3000], int size, int *count_compare, int *count_swap);
+
+void sort(int L, int R, student data[3000], int *count_compare, int *count_swap);
 
 //プロトタイプ宣言。
-void print(student data[3000], int size);
+void print(FILE *fp, student data[3000], int size);
 
-void swap(int i1, int i2, student data[3000]);
-
-int sort(int L, int R, student data[3000]);
-
-int compare = 0;
+void swap(int i1, int i2, student data[3000], int *count_swap);
 
 //コマンド引数を指定できるようにしてmain関数のフォーマットに指定
 int main(int argc, char *argv[]) {
     //コマンド引数が指定されていない場合の対策
-    if (argc < 1) {
+    if (argc < 3) {
         printf("File is not specified correctly...\nEXIT.");
         return 1;
     }
     //ファイルポインターの用意。
     FILE *fp;
     fp = fopen(argv[1], "r");
+    FILE *out;
+    out = fopen(argv[2], "r");
     //データ格納用の変数の用意。
     int size = 0;
     student data[3000];
@@ -45,11 +45,13 @@ int main(int argc, char *argv[]) {
     fclose(fp);
     printf("BEFORE: \n");
     print(data, size);
-    int count = sortInitial(data, size);
+    int count_compare, count_swap;
+    sortInitial(data, size, &count_compare, &count_swap);
     printf("---------------\n");
     printf("AFTER: \n");
-    print(data, size);
-    printf("compare: %3d, swap: %3d", compare, count);
+    print(out,data, size);
+    fclose(out);
+    printf("compare: %3d, swap: %3d", count_compare, count_swap);
     return 0;
 }
 
@@ -57,43 +59,41 @@ int main(int argc, char *argv[]) {
  * "構造体配列とデータ数を引数として関数内で出力を行なうこと"とある。
  */
 
-void print(student data[3000], int size) {
+void print(FILE *fp, student data[3000], int size) {
     for (int i = 0; i < size; ++i) {
-        printf("%4d %-20s %3d\n", data[i].num, data[i].name, data[i].score);
+        fprintf(fp, "%4d %-20s %3d\n", data[i].num, data[i].name, data[i].score);
     }
 }
 
-int sortInitial(student data[3000], int size) {
-    return sort(0, size - 1, data);
+void sortInitial(student data[3000], int size, int *count_compare, int *count_swap) {
+    return sort(0, size - 1, data, count_compare, count_swap);
 }
 
-int sort(int L, int R, student data[3000]) {
-    int count = 0;
+void sort(int L, int R, student data[3000], int *count_compare, int *count_swap) {
     int l = L, r = R, s = data[(L + R) / 2].score;
     while (l <= r) {
-        compare += 2;
+        *count_compare += 2;
         while (data[l].score > s) {
             l++;
-            compare++;
+            (*count_compare)++;
         }
         while (data[r].score < s) {
             r--;
-            compare++;
+            (*count_compare)++;
         }
         if (l < r) {
-            swap(l, r, data);
-            count += 1;
+            swap(l, r, data, count_swap);
         }
         if (l <= r) l++, r--;
     }
-    if (r > L) count += sort(L, r, data);
-    if (R > l) count += sort(l, R, data);
-    return count;
+    if (r > L) sort(L, r, data, count_compare, count_swap);
+    if (R > l) sort(l, R, data, count_compare, count_swap);
 }
 
 //dataの指定のindex番号同士を交換するための関数
-void swap(int i1, int i2, student data[3000]) {
+void swap(int i1, int i2, student data[3000], int *count_swap) {
     student d = data[i1];
     data[i1] = data[i2];
     data[i2] = d;
+    (*count_swap)++;
 }
