@@ -27,7 +27,7 @@ void sort(int L, int R, student data[3000]);
 //コマンド引数を指定できるようにしてmain関数のフォーマットに指定
 int main(int argc, char *argv[]) {
     //コマンド引数が指定されていない場合の対策
-    if (argc < 1) {
+    if (argc < 2) {
         printf("File is not specified correctly...\nEXIT.");
         return 1;
     }
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     FILE *fp;
     fp = fopen(argv[1], "r");
     //データ格納用の変数の用意。
-    int size;
+    int size = 0;
     student data[3000];
     while (fscanf(fp, "%d %s %d", &data[size].num, data[size].name, &data[size].score) != EOF) {
         size++;
@@ -66,7 +66,7 @@ void sortInitial(student data[3000], int size) {
 
 void sort(int L, int R, student data[3000]) {
     int l = L, r = R, s = data[(L + R) / 2].score;
-    while (l < r) {
+    while (l <= r) {
         while (data[l].score > s) l++;
         while (data[r].score < s) r--;
         if (l < r) swap(l, r, data);
