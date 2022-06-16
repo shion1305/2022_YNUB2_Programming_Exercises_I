@@ -66,7 +66,7 @@ void print(int *target, int size, int mark1, int mark2) {
         if (i == mark1 || i == mark2) printf(" *%2d", i);
         else printf("%4d", i);
     }
-    printf("\n");
+    printf("\n\n");
 }
 
 //startインデックス から endインデックスまでバブルソートを行う。
