@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     FILE *fp;
     fp = fopen(argv[1], "r");
     FILE *out;
-    out = fopen(argv[2], "r");
+    out = fopen(argv[2], "w");
     //データ格納用の変数の用意。
     int size = 0;
     student data[3000];
@@ -43,12 +43,8 @@ int main(int argc, char *argv[]) {
         size++;
     }
     fclose(fp);
-    printf("BEFORE: \n");
-    print(data, size);
     int count_compare, count_swap;
     sortInitial(data, size, &count_compare, &count_swap);
-    printf("---------------\n");
-    printf("AFTER: \n");
     print(out,data, size);
     fclose(out);
     printf("compare: %3d, swap: %3d", count_compare, count_swap);
