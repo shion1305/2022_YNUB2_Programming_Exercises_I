@@ -27,4 +27,4 @@ int fLoop(int n) {
     do {
         c *= n;
     } while (--n > 0);
-}main.c
+}
