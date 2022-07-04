@@ -91,7 +91,6 @@ void printStack(int *result, int n, FILE *out) {
 void exportStack(int n, FILE *out) {
     //20行5列で出力する
     for (int j = 0; j < 20; ++j) {
-        fprintf(out, "\n");
         for (int k = 0; k < 5; ++k) {
             //5列それぞれを出力する。
             for (int l = 0; l < n; ++l) {
@@ -114,6 +113,7 @@ void exportStack(int n, FILE *out) {
             fprintf(out, " ");
             //列の区切りの為の空白
         }
+        fprintf(out, "\n");
     }
     fprintf(out, "\n");
     size = 0;
