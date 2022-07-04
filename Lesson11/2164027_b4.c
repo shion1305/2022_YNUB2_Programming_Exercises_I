@@ -11,7 +11,7 @@ int data[N][N] = {
         {8, 8, 0, 0, 8, 0, 8, 8, 0, 8},
         {8, 0, 8, 0, 8, 0, 0, 8, 0, 8},
         {8, 0, 0, 0, 8, 8, 0, 0, 0, 8},
-        {8, 8, 8, 0, 0, 0, 0, 8, 8, 8},
+        {8, 8, 8, 0, 0, 0, 0, 8, 0, 8},
         {8, 8, 8, 8, 8, 8, 8, 8, 9, 8}};
 
 //結果を出力する関数。
@@ -51,13 +51,14 @@ int search(int x, int y, int d[N][N], int step, FILE *out) {
             return 0;
     }
     step++;
+    int r = 1;
     //解の数を記録しながら上下左右に再帰的に探索。
-    if (x > 0) sum_r += search(x - 1, y, d, step, out);
-    if (y > 0) sum_r += search(x, y - 1, d, step, out);
-    if (x < N - 1) sum_r += search(x + 1, y, d, step, out);
-    if (y < N - 1) sum_r += search(x, y + 1, d, step, out);
+    if (x > 0) if (search(x - 1, y, d, step, out))return 1;
+    if (y > 0) if (search(x, y - 1, d, step, out))return 1;
+    if (x < N - 1) if (search(x + 1, y, d, step, out))return 1;
+    if (y < N - 1) if (search(x, y + 1, d, step, out))return 1;
     if (d[x][y] == 2) d[x][y] = 0;
-    return sum_r;
+    return 0;
 }
 
 //開始地点を見つけスタートさせる。解の数を返す。
@@ -83,7 +84,9 @@ int main(int argc, char *argv[]) {
     int result = start(data, out);
     if (result == 0) {
         printf("解がありません。\n");
+        fprintf(out, "Route not found");
         return 0;
     }
-    printf("%d results found, Completed. Output: %s.", result, argv[1]);
+    printf("Route found, Completed. Output: %s", argv[1]);
+    fclose(out);
 }

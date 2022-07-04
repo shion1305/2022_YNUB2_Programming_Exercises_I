@@ -79,4 +79,5 @@ int main(int argc, char *argv[]) {
     //処理の開始
     start(data, out);
     printf("Completed. Output: %s.", argv[1]);
+    fclose(out);
 }
