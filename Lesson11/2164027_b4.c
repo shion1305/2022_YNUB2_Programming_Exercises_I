@@ -16,6 +16,7 @@ int data[N][N] = {
 
 int x1 = 0, y1 = 0;
 
+//引数で指定された経路データを出力する関数
 void printRoute(int d[N][N], FILE *out) {
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < N; ++j) {
@@ -27,6 +28,7 @@ void printRoute(int d[N][N], FILE *out) {
                     fprintf(out, "■");
                     break;
                 case 5:
+                    //最後に渡来した場所
                     fprintf(out, "★");
                     break;
                 default:
@@ -84,6 +86,7 @@ int start(int d[N][N], FILE *out) {
     return 0;
 }
 
+//エラーを出力する関数。最終地点を5に置き換え、元に戻す。
 void printError(int in[N][N], FILE *out) {
     in[x1][y1] = 5;
     printRoute(in, out);
