@@ -35,7 +35,7 @@ void printR(int d[N][N], int step, FILE *out) {
     fprintf(out, "\n");
 }
 
-//上下左右を確認し、もし道が見つかれば次へ進む。解の数を返す。
+//上下左右を確認し、もし道が見つかれば次へ進む。解の存在有無を返す。
 int search(int x, int y, int d[N][N], int step, FILE *out) {
     int sum_r = 0;
     //道があれば(0,1)その道をマーク。なければ関数を探索を終了する。
@@ -52,7 +52,7 @@ int search(int x, int y, int d[N][N], int step, FILE *out) {
     }
     step++;
     int r = 1;
-    //解の数を記録しながら上下左右に再帰的に探索。
+    //上下左右に再帰的に探索し、解がみつかればすぐに操作を停止する。
     if (x > 0) if (search(x - 1, y, d, step, out))return 1;
     if (y > 0) if (search(x, y - 1, d, step, out))return 1;
     if (x < N - 1) if (search(x + 1, y, d, step, out))return 1;
@@ -61,7 +61,7 @@ int search(int x, int y, int d[N][N], int step, FILE *out) {
     return 0;
 }
 
-//開始地点を見つけスタートさせる。解の数を返す。
+//開始地点を見つけスタートさせる。解が存在すれば1を、しなければ0を返す。1つでも解が見つかったら操作を停止する。
 int start(int d[N][N], FILE *out) {
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < N; ++j) {
@@ -71,6 +71,7 @@ int start(int d[N][N], FILE *out) {
             }
         }
     }
+    return 0;
 }
 
 int main(int argc, char *argv[]) {
