@@ -2,7 +2,7 @@
 
 #define SIZE 5
 #define MAX 15
-int data[] = {7, 4, 5, 6, 3};
+int data[SIZE] = {7, 4, 5, 6, 3};
 
 //結果を出力する関数。
 void printR(int step, int result[SIZE]) {
@@ -25,7 +25,7 @@ void check(int start, int sum, int step, int result[SIZE]) {
 
 //checkを0,0,0と空配列を渡すことでスタートさせる。
 int main() {
-    printf("最大搭載量 15t の荷物の組み合わせは以下の通り。\n");
+    printf("最大搭載量 %dt の荷物の組み合わせは以下の通り。\n", MAX);
     int result[SIZE];
     check(0, 0, 0, result);
 }
