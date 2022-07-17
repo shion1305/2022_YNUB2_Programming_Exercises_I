@@ -8,7 +8,6 @@ typedef struct PlayerB {
     char metaData[60];
     struct PlayerB *next;
 } Player;
-Player *data;
 
 //ファイルポインタを引数として線形リストを生成する関数
 Player *genList(FILE *in) {
@@ -37,17 +36,15 @@ void printList(Player *d) {
         print = print->next;
     }
 }
-
-int delete(int number) {
-    //もしdataが存在しない場合
-    if (data == NULL) return 0;
-
-    Player *query = data->next, *prev = data;
-
+//ポインタのポインタを引数をすることで先頭データの削除にも対応する。
+int delete(int number, Player **data) {
+    //もし*dataが存在しない場合
+    if (*data == NULL) return 0;
+    Player *query = (*data)->next, *prev = *data;
     //もし線形リストの先頭が削除対象の場合
-    if (data->number == number) {
+    if ((*data)->number == number) {
         //先頭を次のデータに置き換える
-        data = data->next;
+        *data = (*data)->next;
         free(prev);
         return 1;
     }
@@ -70,7 +67,7 @@ int main(int argc, char *argv[]) {
     //コマンド引数で指定されたファイルを開く
     FILE *in = fopen(argv[1], "r");
     //線形リストを生成
-    data = genList(in);
+    Player *data = genList(in);
     //リストをプリント
     printList(data);
 
@@ -81,8 +78,8 @@ int main(int argc, char *argv[]) {
         scanf("%d", &number);
         //0を入力されたら終了
         if (number == 0)break;
-        //指定された番号のデータが見つかったら削除する
-        if (delete(number)) {
+        //指定された番号のデータが見つかったら削除する。ポインタのポインタを引数とすることで先頭データの削除もできるようにする。
+        if (delete(number, &data)) {
             printf("---削除しました---\n");
         } else {
             printf("---該当者はいません---\n");
