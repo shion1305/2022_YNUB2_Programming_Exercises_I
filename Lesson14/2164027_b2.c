@@ -54,28 +54,17 @@ void printTree(Player *root, int level) {
   }
 }
 
-//探索木から指定のnumberの要素を検索してポインタを返す関数
-Player *search(int number, Player *root) {
-  if (root == NULL)return NULL;
-  if (number < root->number) {
-    return search(number, root->left);
-  } else if (number > root->number) {
-    return search(number, root->right);
-  } else {
-    return root;
-  }
-}
+typedef enum {//行う操作を列挙型で表現する
+  SEARCH,
+  DELETE
+} Command;
 
-
-//探索木の要素を削除する関数
-int deleteNode(int number, Player **root) {
+//探索木の要素の探索,または削除を行う関数(cmdで行う操作を指定する)
+Player *searchOrDelete(Command cmd, int number, Player **root) {
   Player *parent = NULL, *target = *root;
-  //まず削除対象とその親の顔も見てみたい
+  //まず対象とその親の顔も見てみたい(削除する時のために)
   while (1) {
-    if (target == NULL) {
-      printf("見つかりませんでした\n");
-      return 0;
-    }
+    if (target == NULL)return NULL;
     //numberの値を探索するため、探索位置の値によって探索方向を変える
     if (number < target->number) {
       parent = target;
@@ -83,9 +72,10 @@ int deleteNode(int number, Player **root) {
     } else if (number > target->number) {
       parent = target;
       target = target->right;
-    } else break; //削除対象を発見したらループを抜ける
+    } else break; //対象を発見したらループを抜ける
   }
-  //削除対象とその親の顔が見えた!!(親がない場合はNULL) 削除に移行する
+  if (cmd == SEARCH)return target;
+  //前の結果から削除対象とその親の顔が見えた!!(親がない場合はNULL) 削除に移行する
   if (target->left == NULL && target->right == NULL) {//targetが子供を持たない場合
     if (parent == NULL) {
       *root = NULL;//削除対象がrootの場合
@@ -135,7 +125,7 @@ int deleteNode(int number, Player **root) {
     }
   }
   free(target);
-  return 1;
+  return *root;//削除が行われた場合はrootを返す
 }
 
 int main(int argc, char *argv[]) {
@@ -145,11 +135,9 @@ int main(int argc, char *argv[]) {
   Player *root = NULL;
   while (1) {
     Player *tmpP;
-    tmpP = (Player *) malloc(sizeof(Player));
-    //fscanfで読み込みを行う。EOFが発生したら読み込みを終了する
+    tmpP = (Player *) malloc(sizeof(Player));//fscanfで読み込みを行う。EOFが発生したら読み込みを終了する
     if (fscanf(in, "%d %s %s", &tmpP->number, tmpP->name, tmpP->metaData) == EOF) break;
-    //tmpPをnumberの探索木に追加する
-    root = createTree(tmpP, root);
+    root = createTree(tmpP, root);//tmpPをnumberの探索木に追加する
   }
   //numberの探索木を表示
   printTree(root, 0);
@@ -162,15 +150,15 @@ int main(int argc, char *argv[]) {
       case 1:
         printf("探索するnumberを入力してください\n");
         scanf("%d", &input);
-        printElement(search(input, root));
+        printElement(searchOrDelete(SEARCH, input, &root));
         break;
       case 2:
         printf("削除するnumberを入力してください\n");
         scanf("%d", &input);
-        if (deleteNode(input, &root)) {
-          printf("削除しました\n");
-        } else {
+        if (searchOrDelete(DELETE, input, &root) == NULL) {
           printf("---該当者が見つかりませんでした---\n");
+        } else {
+          printf("削除しました\n");
         }
         break;
       case 3:
